@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>theHackJob - Your Career Community</title>
+    <title>RatMates - Your Career Community</title>
     <style>
         * {
             margin: 0;
@@ -59,7 +59,7 @@
 
         .hero {
             text-align: center;
-            padding: 100px 0;
+            padding: 60px 0 30px;
         }
 
         h1 {
@@ -73,7 +73,7 @@
         .subtitle {
             font-size: 1.5em;
             color: #B19CD9;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
@@ -83,7 +83,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            margin: 50px 0;
+            margin: 40px 0;
             perspective: 1000px;
         }
 
@@ -115,7 +115,7 @@
         .waiting-list {
             position: relative;
             max-width: 500px;
-            margin: 50px auto;
+            margin: 30px auto;
         }
 
         .email-input-container {
@@ -142,27 +142,6 @@
             box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
         }
 
-        .sparkle {
-            position: absolute;
-            pointer-events: none;
-            background: white;
-            border-radius: 50%;
-            width: 4px;
-            height: 4px;
-            animation: sparkle-fall 1s linear forwards;
-        }
-
-        @keyframes sparkle-fall {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(50px) scale(0);
-                opacity: 0;
-            }
-        }
-
         .error-message {
             color: #ff4444;
             font-size: 14px;
@@ -180,7 +159,7 @@
         .submit-btn {
             position: absolute;
             right: 5px;
-            top: 5px;
+            top: 8px;
             padding: 15px 30px;
             border-radius: 6px;
             border: none;
@@ -208,6 +187,27 @@
                 font-size: 1.2em;
             }
         }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+            animation: sparkle-fall 1s linear forwards;
+        }
+
+        @keyframes sparkle-fall {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(50px) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -219,7 +219,7 @@
 
     <div class="container">
         <nav>
-            <div class="logo">theHackJob</div>
+            <div class="logo">RatMates</div>
         </nav>
 
         <div class="hero">
@@ -233,23 +233,23 @@
                 </div>
                 <button class="submit-btn">Join Now</button>
             </div>
-        </div>
 
-        <div class="features">
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Targeted Opportunities</h3>
-                <p>Find internships and jobs filtered by location and your interests</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3>Community Support</h3>
-                <p>Get advice from peers who've been through the same journey</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⭐</div>
-                <h3>Quality Content</h3>
-                <p>Upvote the most helpful advice and experiences</p>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Targeted Opportunities</h3>
+                    <p>Find internships and jobs filtered by location and your interests</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Community Support</h3>
+                    <p>Get advice from peers who've been through the same journey</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Quality Content</h3>
+                    <p>Upvote the most helpful advice and experiences</p>
+                </div>
             </div>
         </div>
     </div>
@@ -265,8 +265,6 @@
             sparkle.style.left = `${x}px`;
             sparkle.style.top = `${y}px`;
             document.querySelector('.email-input-container').appendChild(sparkle);
-
-            // Remove sparkle after animation
             setTimeout(() => sparkle.remove(), 1000);
         }
 
@@ -276,10 +274,8 @@
 
         emailInput.addEventListener('input', (e) => {
             const rect = e.target.getBoundingClientRect();
-            const charX = e.target.selectionStart * 10 + rect.left + 20; // Approximate char position
+            const charX = e.target.selectionStart * 10 + rect.left + 20;
             createSparkle(charX, rect.top);
-            
-            // Hide error message when typing
             errorMessage.classList.remove('visible');
         });
 
@@ -288,10 +284,8 @@
             const email = emailInput.value;
 
             if (validateEmail(email)) {
-                // Success - redirect to subscribe page
                 window.location.href = 'subscribe.html';
             } else {
-                // Show error message
                 errorMessage.classList.add('visible');
                 emailInput.style.borderColor = '#ff4444';
                 setTimeout(() => {
@@ -300,14 +294,12 @@
             }
         });
 
-        // Also validate on Enter key
         emailInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 submitBtn.click();
             }
         });
 
-        // Add floating animation to bubbles
         document.querySelectorAll('.bubble').forEach(bubble => {
             bubble.style.left = `${Math.random() * 100}%`;
             bubble.style.animationDelay = `${Math.random() * 2}s`;
