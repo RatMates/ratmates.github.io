@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>theHackJob - Your Career Community</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0F0817;
+            color: #fff;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(138, 43, 226, 0.1);
+            animation: float 8s infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8A2BE2;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #8A2BE2, #FF1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #B19CD9;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 50px 0;
+            perspective: 1000px;
+        }
+
+        .feature-card {
+            background: rgba(138, 43, 226, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translate3d(-5px, -5px, 20px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 
+                15px 15px 30px rgba(138, 43, 226, 0.2),
+                -5px -5px 30px rgba(255, 20, 147, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #8A2BE2;
+        }
+
+        .waiting-list {
+            position: relative;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        .email-input-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border: 2px solid rgba(138, 43, 226, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 16px;
+            padding-right: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #8A2BE2;
+            background: rgba(138, 43, 226, 0.1);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: white;
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+            animation: sparkle-fall 1s linear forwards;
+        }
+
+        @keyframes sparkle-fall {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(50px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 8px;
+            text-align: left;
+            padding-left: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .error-message.visible {
+            opacity: 1;
+        }
+
+        .submit-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            padding: 15px 30px;
+            border-radius: 6px;
+            border: none;
+            background: linear-gradient(45deg, #8A2BE2, #FF1493);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .subtitle {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Bubbles -->
+    <div class="bubble" style="width: 100px; height: 100px; top: 20%; left: 10%"></div>
+    <div class="bubble" style="width: 150px; height: 150px; top: 50%; right: 20%"></div>
+    <div class="bubble" style="width: 80px; height: 80px; bottom: 30%; left: 30%"></div>
+
+    <div class="container">
+        <nav>
+            <div class="logo">theHackJob</div>
+        </nav>
+
+        <div class="hero">
+            <h1>Your Career Journey Starts Here</h1>
+            <p class="subtitle">Join the first community-driven platform for Bocconi students to share experiences, get advice, and find the best career opportunities.</p>
+
+            <div class="waiting-list">
+                <div class="email-input-container">
+                    <input type="email" class="email-input" placeholder="Enter your email to join the waiting list">
+                    <div class="error-message">Please enter a valid email address</div>
+                </div>
+                <button class="submit-btn">Join Now</button>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Targeted Opportunities</h3>
+                <p>Find internships and jobs filtered by location and your interests</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Community Support</h3>
+                <p>Get advice from peers who've been through the same journey</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Quality Content</h3>
+                <p>Upvote the most helpful advice and experiences</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const emailInput = document.querySelector('.email-input');
+        const errorMessage = document.querySelector('.error-message');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            document.querySelector('.email-input-container').appendChild(sparkle);
+
+            // Remove sparkle after animation
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        emailInput.addEventListener('input', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const charX = e.target.selectionStart * 10 + rect.left + 20; // Approximate char position
+            createSparkle(charX, rect.top);
+            
+            // Hide error message when typing
+            errorMessage.classList.remove('visible');
+        });
+
+        submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = emailInput.value;
+
+            if (validateEmail(email)) {
+                // Success - redirect to subscribe page
+                window.location.href = 'subscribe.html';
+            } else {
+                // Show error message
+                errorMessage.classList.add('visible');
+                emailInput.style.borderColor = '#ff4444';
+                setTimeout(() => {
+                    emailInput.style.borderColor = 'rgba(138, 43, 226, 0.3)';
+                }, 2000);
+            }
+        });
+
+        // Also validate on Enter key
+        emailInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
+
+        // Add floating animation to bubbles
+        document.querySelectorAll('.bubble').forEach(bubble => {
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDelay = `${Math.random() * 2}s`;
+        });
+    </script>
+</body>
+</html>
