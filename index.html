@@ -114,7 +114,7 @@
         }
 
         .feature-card h3 {
-            margin-bottom: 15px; /* Adjust the value as needed for desired spacing */
+            margin-bottom: 15px;
         }
 
         .waiting-list {
@@ -179,7 +179,7 @@
             box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .features {
                 grid-template-columns: 1fr;
             .submit-btn {
@@ -190,11 +190,11 @@
                 margin: 0 auto;
          }
             }
-            
+
             h1 {
                 font-size: 2.5em;
             }
-            
+
             .subtitle {
                 font-size: 1.2em;
             }
@@ -237,7 +237,7 @@
 
         <div class="hero">
             <h1>Your Career Journey Starts Here</h1>
-            <p class="subtitle">Join the first community-driven platform for Bocconi students to find the best career opportunities.</p>
+            <p class="subtitle">Join the first community-driven platform for students to find the best career opportunities.</p>
 
             <div class="waiting-list">
                 <div class="email-input-container">
@@ -297,7 +297,7 @@
 
                 if (response.ok) {
                     alert("Email successfully sent!");
-                    emailInput.value = ""; // Clear the input field
+                    emailInput.value = ""; 
                 } else {
                     alert("Failed to send email. Please try again.");
                 }
